@@ -77,6 +77,24 @@ Test and implement a `Math` module. Include at least two assertions for each hap
 
 ```elixir
 defmodule Math do
+  def add(x, y) when is_number(x) and is_number(y), do: x + y
+  def add(x, y) when is_binary(x) and is_binary(y), do: x ++ y
+end
+
+ExUnit.start(auto_run: true)
+
+defmodule MathTest do
+  use ExUnit.Case
+
+  describe "testing add function on numbers" do
+    test "2 and 2", do: assert(Math.add(2, 2) == 4)
+    test "0 and 1", do: assert(Math.add(0, 1) == 1)
+  end
+
+  describe "testing add function on strings" do
+    test "a and b", do: assert(Math.add("a", "b") == "ab")
+    test "dhg and qwer", do: assert(Math.add("dhg", "qwer") == "dhgqwer")
+  end
 end
 ```
 
